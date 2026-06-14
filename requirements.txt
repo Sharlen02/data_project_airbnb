@@ -1,0 +1,19 @@
+# Interface web
+streamlit>=1.45.0
+
+# Base de données embarquée
+duckdb>=1.3.0
+
+# dbt et adaptateur DuckDB
+dbt-core>=1.9.0
+dbt-duckdb>=1.9.0
+
+# Manipulation de données
+pandas>=2.2.0
+pyarrow>=20.0.0
+
+# Variables d'environnement
+python-dotenv>=1.1.0
+
+# Visualisation (optionnel mais fréquent)
+plotly>=6.0.0

@@ -1,0 +1,82 @@
+version: 2
+
+models:
+  - name: bronze_hosts
+    description: "Ingestion brute des hôtes depuis le CSV source S3 — aucune transformation, toutes les colonnes en STRING"
+    columns:
+      - name: id
+        description: "Identifiant brut de l'hôte"
+        tests:
+          - not_null
+          - unique
+      - name: name
+        description: "Nom de l'hôte"
+      - name: is_superhost
+        description: "Indicateur superhost (valeur brute : t/f)"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['t', 'f', 'true', 'false', 'True', 'False']
+      - name: created_at
+        description: "Date de création du compte"
+        tests:
+          - not_null
+      - name: updated_at
+        description: "Date de dernière mise à jour"
+        tests:
+          - not_null
+
+  - name: bronze_listings
+    description: "Ingestion brute des logements depuis le CSV source S3"
+    columns:
+      - name: id
+        description: "Identifiant brut du logement"
+        tests:
+          - not_null
+          - unique
+      - name: listing_url
+        description: "URL du logement Airbnb"
+        tests:
+          - not_null
+      - name: name
+        description: "Nom du logement"
+      - name: room_type
+        description: "Type de chambre (brut)"
+        tests:
+          - not_null
+      - name: minimum_nights
+        description: "Nombre minimum de nuits (brut, peut être 0 ou null)"
+      - name: host_id
+        description: "Référence à l'hôte"
+        tests:
+          - not_null
+      - name: price
+        description: "Prix brut avec symbole $ (ex: $120.00)"
+        tests:
+          - not_null
+      - name: created_at
+        description: "Date de création"
+        tests:
+          - not_null
+      - name: updated_at
+        description: "Date de mise à jour"
+        tests:
+          - not_null
+
+  - name: bronze_reviews
+    description: "Ingestion brute des avis clients depuis le CSV source S3"
+    columns:
+      - name: listing_id
+        description: "Référence au logement reviewé"
+        tests:
+          - not_null
+      - name: date
+        description: "Date de l'avis (brute)"
+        tests:
+          - not_null
+      - name: reviewer_name
+        description: "Nom du reviewer"
+      - name: comments
+        description: "Texte de l'avis — peut être null"
+      - name: sentiment
+        description: "Sentiment pré-calculé (brut)"
