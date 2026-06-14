@@ -1,0 +1,103 @@
+version: 2
+
+models:
+  - name: silver_hosts
+    description: "Hôtes nettoyés et typés — host_id en INTEGER, is_superhost en BOOLEAN, noms null remplacés par 'Anonymous'"
+    columns:
+      - name: host_id
+        description: "Identifiant unique de l'hôte (INTEGER)"
+        tests:
+          - not_null
+          - unique
+      - name: host_name
+        description: "Nom de l'hôte — jamais null grâce au COALESCE"
+        tests:
+          - not_null
+      - name: is_superhost
+        description: "Booléen indiquant si l'hôte est superhost"
+        tests:
+          - not_null
+      - name: created_at
+        description: "Date de création castée en TIMESTAMP"
+        tests:
+          - not_null
+      - name: updated_at
+        description: "Date de mise à jour castée en TIMESTAMP"
+        tests:
+          - not_null
+
+  - name: silver_listings
+    description: "Logements nettoyés — prix en DECIMAL, minimum_nights >= 1, host_id en INTEGER"
+    columns:
+      - name: listing_id
+        description: "Identifiant unique du logement (INTEGER)"
+        tests:
+          - not_null
+          - unique
+      - name: listing_url
+        description: "URL publique du logement"
+        tests:
+          - not_null
+      - name: listing_name
+        description: "Nom du logement"
+      - name: room_type
+        description: "Type de chambre"
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - 'Entire home/apt'
+                - 'Private room'
+                - 'Shared room'
+                - 'Hotel room'
+      - name: minimum_nights
+        description: "Durée minimum — toujours >= 1 grâce au GREATEST"
+        tests:
+          - not_null
+      - name: host_id
+        description: "Clé étrangère vers silver_hosts"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('silver_hosts')
+              field: host_id
+      - name: price
+        description: "Prix en DECIMAL — symbole $ retiré"
+        tests:
+          - not_null
+      - name: created_at
+        description: "Date de création en TIMESTAMP"
+        tests:
+          - not_null
+      - name: updated_at
+        description: "Date de mise à jour en TIMESTAMP"
+        tests:
+          - not_null
+
+  - name: silver_reviews
+    description: "Avis clients nettoyés — review_date en DATE, review_text renommé, lignes sans commentaire filtrées"
+    columns:
+      - name: listing_id
+        description: "Référence au logement — clé étrangère vers silver_listings"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('silver_listings')
+              field: listing_id
+      - name: review_date
+        description: "Date de l'avis castée en DATE"
+        tests:
+          - not_null
+      - name: reviewer_name
+        description: "Nom du reviewer"
+      - name: review_text
+        description: "Texte de l'avis — jamais null (filtré dans le WHERE)"
+        tests:
+          - not_null
+      - name: sentiment
+        description: "Sentiment de l'avis"
+        tests:
+          - accepted_values:
+              values: ['positive', 'negative', 'neutral']
+              config:
+                severity: warn  # warn car certaines valeurs peuvent être inconnues
