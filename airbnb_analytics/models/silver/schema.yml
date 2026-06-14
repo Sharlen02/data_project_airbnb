@@ -1,0 +1,64 @@
+
+
+models:
+  - name: silver_hosts
+    columns:
+      - name: host_id
+        tests:
+          - not_null
+          - unique
+
+      - name: host_is_superhost
+        tests:
+          - accepted_values:
+              arguments:
+                values: [true, false]
+
+  - name: silver_listings
+    columns:
+      - name: listing_id
+        tests:
+          - not_null
+          - unique
+
+      - name: host_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('silver_hosts')
+                field: host_id
+
+      - name: room_type
+        tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - entire home/apt
+                  - private room
+                  - shared room
+                  - hotel room
+
+  - name: silver_reviews
+    columns:
+      - name: review_id
+        tests:
+          - not_null
+          - unique
+
+      - name: listing_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('silver_listings')
+                field: listing_id
+
+      - name: sentiment
+        tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - positive
+                  - negative
+                  - neutral
