@@ -254,8 +254,8 @@ La ligne ignorée correspond à l'avis du listing `271340` du `2016-05-04`.
 
 | Branche | Responsable | Contenu |
 |---------|-------------|---------|
-| `main` | Tous | Version stable |
+| `main` | Sharlen | Version stable |
 | `develop` | Tous | Intégration continue |
-| `bronze/p1` | P1 | Couche Bronze + infrastructure |
-| `silver/p2` | P2 | Couche Silver + tests qualité |
-| `gold/p3` | P3 | Couche Gold + Streamlit |
+| `bronze/stephen` | Stephen | Couche Bronze + infrastructure |
+| `silver/bientakonne` | Bientakonné | Couche Silver + tests qualité |
+| `gold/sharlen` | Sharlen | Couche Gold + Streamlit |
