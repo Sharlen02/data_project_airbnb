@@ -157,13 +157,11 @@ airbnb_analytics:
 Les fichiers CSV ne sont pas versionnés (taille > 100 MB).  
 Les télécharger depuis le lien partagé par l'équipe et les placer dans `airbnb_analytics/seeds/` :
 
-```
 airbnb_analytics/seeds/
 ├── [hosts.csv](https://logbrain-datasets.s3.eu-west-1.amazonaws.com/airbnb/hosts.csv)  
 ├── [reviews.csv](https://logbrain-datasets.s3.eu-west-1.amazonaws.com/airbnb/reviews.csv)   
 ├── [listings.json](https://logbrain-datasets.s3.eu-west-1.amazonaws.com/airbnb/listings.csv)   
 └── [seed_full_moon_dates.csv](https://logbrain-datasets.s3.eu-west-1.amazonaws.com/airbnb/seed_full_moon_dates.csv)
-```
 
 ---
 
