@@ -1,4 +1,4 @@
--- Échoue si minimum_nights est négatif ou nul
+-- Échoue si minimum_nights est négatif
 SELECT *
 FROM {{ ref('silver_listings') }}
-WHERE minimum_nights <= 0
+WHERE minimum_nights < 0

@@ -2,7 +2,7 @@ import duckdb
 import os
 
 base     = os.path.dirname(os.path.abspath(__file__))
-db_path  = os.path.join(base, '..', '..', 'airbnb.duckdb')
+db_path  = os.path.join(base, '..', '..', 'dev.duckdb')
 csv_path = os.path.join(base, '..', 'reviews.csv')
 
 con = duckdb.connect(db_path)

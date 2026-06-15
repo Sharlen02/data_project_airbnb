@@ -1,7 +1,3 @@
-{{ config(materialized='table') }}
+{{ config(materialized='table', schema='bronze') }}
 
-select * from read_csv_auto(
-    'seeds/reviews.csv',
-    ignore_errors=true,
-    strict_mode=false
-)
+SELECT * FROM {{ ref('reviews') }}
