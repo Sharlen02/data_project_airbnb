@@ -34,7 +34,7 @@ dbt Seeds (DuckDB)
     │       │
     ├── Silver (nettoyage, typage)
     │       │
-    └── Gold  (agrégats métier)
+    └── Gold  (analyses métier)
                 │
                 ▼
         Dashboard Streamlit
@@ -70,7 +70,7 @@ data_project_airbnb/
 │   │   │   ├── silver_hosts.sql
 │   │   │   ├── silver_reviews.sql
 │   │   │   └── silver_full_moon_dates.sql
-│   │   └── gold/               ← Agrégats métier
+│   │   └── gold/               ← Analyse métier
 │   │       ├── schema.yml
 │   │       ├── gold_listings_summary.sql
 │   │       ├── gold_host_performance.sql
@@ -78,10 +78,10 @@ data_project_airbnb/
 │   │       └── gold_full_moon_impact.sql
 │   ├── seeds/
 │   │   ├── schema.yml
-│   │   ├── listings.csv        ← Non versionné (voir section Données)
-│   │   ├── hosts.csv           ← Non versionné
-│   │   ├── reviews.csv         ← Non versionné
-│   │   └── seed_full_moon_dates.csv ← Non versionné
+│   │   ├── listings.csv        ← Non versionné (Ajouter les tables de données)
+│   │   ├── hosts.csv           ← Non versionné (Ajouter les tables de données)
+│   │   ├── reviews.csv         ← Non versionné (Ajouter les tables de données)
+│   │   └── seed_full_moon_dates.csv ← Non versionné (Ajouter les tables de données)
 │   ├── seeds/scripts/
 │   │   └── load_reviews.py     ← Chargement manuel reviews (ligne malformée)
 │   ├── tests/
@@ -159,10 +159,10 @@ Les télécharger depuis le lien partagé par l'équipe et les placer dans `airb
 
 ```
 airbnb_analytics/seeds/
-├── listings.csv
-├── hosts.csv
-├── reviews.csv
-└── seed_full_moon_dates.csv
+├── [hosts.csv](https://logbrain-datasets.s3.eu-west-1.amazonaws.com/airbnb/hosts.csv)  
+├── [reviews.csv](https://logbrain-datasets.s3.eu-west-1.amazonaws.com/airbnb/reviews.csv)   
+├── [listings.json](https://logbrain-datasets.s3.eu-west-1.amazonaws.com/airbnb/listings.csv)   
+└── [seed_full_moon_dates.csv](https://logbrain-datasets.s3.eu-west-1.amazonaws.com/airbnb/seed_full_moon_dates.csv)
 ```
 
 ---
@@ -198,7 +198,6 @@ dbt test
 ```bash
 dbt compile --write-catalog
 dbt docs serve
-# Ouvre http://localhost:8080
 ```
 
 ### 5. Lancer le dashboard Streamlit
