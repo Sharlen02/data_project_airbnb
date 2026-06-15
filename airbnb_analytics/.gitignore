@@ -2,6 +2,7 @@
 .venv/
 venv/
 env/
+../venv
 
 # Python
 __pycache__/
@@ -29,6 +30,7 @@ __pycache__/
 target/
 dbt_packages/
 logs/
+../logs/
 
 # DuckDB
 *.duckdb
@@ -50,4 +52,4 @@ dist/
 
 *.duckdb
 airbnb_analytics/seeds/*.csv
-
+dbt_internal_packages/

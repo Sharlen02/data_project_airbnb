@@ -1,0 +1,39 @@
+version: 2
+
+seeds:
+  - name: listings
+    config:
+      column_types:
+        id: integer
+        listing_url: varchar
+        name: varchar
+        room_type: varchar
+        minimum_nights: integer
+        host_id: integer
+        price: varchar
+        created_at: timestamp
+        updated_at: timestamp
+
+  - name: hosts
+    config:
+      column_types:
+        id: integer
+        name: varchar
+        host_is_superhost: integer
+        created_at: timestamp
+        updated_at: timestamp
+
+  - name: reviews
+    config:
+      column_types:
+        listing_id: integer
+        date: timestamp
+        reviewer_name: varchar
+        comments: varchar
+        sentiment: varchar
+
+
+  - name: seed_full_moon_dates
+    config:
+      column_types:
+        full_moon_date: date

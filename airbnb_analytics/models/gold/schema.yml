@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: gold_listings_summary
+    description: "Statistiques agrégées par type de logement."
+    columns:
+      - name: room_type
+        description: "Type de logement"
+        tests:
+          - unique
+          - not_null
+      - name: avg_price
+        description: "Prix moyen par nuit"
+      - name: nb_listings
+        description: "Nombre de logements"
+
+  - name: gold_host_performance
+    columns:
+      - name: host_is_superhost
+        tests:
+          - unique
+
+
+  - name: gold_reviews_sentiment
+    description: "Évolution mensuelle des sentiments des avis."
+    columns:
+      - name: review_month
+        description: "Mois de l'avis (tronqué au 1er du mois)"
+      - name: sentiment
+        description: "Sentiment de l'avis"
+      - name: nb_reviews
+        description: "Nombre d'avis"
+
+  - name: gold_full_moon_impact
+    description: "Impact des nuits de pleine lune sur les sentiments des avis."
+    columns:
+      - name: period_type
+        description: "Pleine lune ou Nuit normale"
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Pleine lune', 'Nuit normale']
+      - name: sentiment
+        description: "Sentiment de l'avis"
+      - name: nb_reviews
+        description: "Nombre d'avis"
+      - name: pct_within_period
+        description: "Pourcentage du sentiment dans la période"
